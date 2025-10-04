@@ -1,0 +1,19 @@
+- hosts: prod
+  tasks:
+    - name: Stop old container
+      community.docker.docker_container:
+        name: prod-web
+        state: absent
+
+    - name: Start new version
+      community.docker.docker_container:
+        name: prod-web
+        image: localhost:5000/devops-project:latest
+        ports:
+          - "8081:5000"
+        env:
+          DB_HOST: db
+          DB_NAME: namesdb
+          DB_USER: postgres
+          DB_PASS: postgres
+        restart_policy: always
