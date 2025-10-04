@@ -1,0 +1,5 @@
+- hosts: local
+  tasks:
+    - name: Levantar contenedores
+      command: docker compose -f /home/blag/Documents/devops-project/docker-compose.yml up -d --build 
+
